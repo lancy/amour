@@ -1,0 +1,23 @@
+<h1>Welcome {{ usersShow.name }} </h1>
+<p><img src="{{ usersShow.avatar_large }}" alt="我的头像" /></p>
+<ul>
+    <li>我的名字：{{ usersShow.name }}</li>
+    <li>我的ID：{{ usersShow.id }}</li>
+    <li>我的粉丝：{{ usersShow.followers_count }}</li>
+    <li>我的关注：{{ usersShow.friends_count }}</li>
+    <li>我的状态数：{{ usersShow.statuses_count }}</li>
+    <li>我的签名：{{ usersShow.description }}</li>
+</ul>
+
+<h2>我的微博</h2>
+<ul>
+{% for statuse in userTimeline.statuses %}
+    <p>
+        <li>{{ statuse.created_at }}</li>
+        <ul>
+            <li>{{ statuse.text }} </li>
+        </ul>
+    </p>
+{% endfor %}
+</ul>
+
