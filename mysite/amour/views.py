@@ -2,6 +2,7 @@ from django.shortcuts import render_to_response
 from weibo import APIClient
 from math import ceil
 
+
 APP_KEY = "3049348926"
 APP_SECRET = "712a1724b4d5e38b3a1895d6efce205d"
 CALLBACK_URL = "http://127.0.0.1:8000/amour"
