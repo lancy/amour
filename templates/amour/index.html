@@ -1,27 +1,45 @@
-{% if authorizeUrl %}
-    <h1>Welcome</h1>
-    <a href="{{ authorizeUrl }}">Begin Authorize</a>
-{% else %}
-    <h1>Welcome {{ usersShow.name }} </h1>
-    <p><img src="{{ usersShow.avatar_large }}" alt="我的头像" /></p>
-    <ul>
-        <li>我的名字：{{ usersShow.name }}</li>
-        <li>我的ID：{{ usersShow.id }}</li>
-        <li>我的粉丝：{{ usersShow.followers_count }}</li>
-        <li>我的关注：{{ usersShow.friends_count }}</li>
-        <li>我的状态数：{{ usersShow.statuses_count }}</li>
-        <li>我的签名：{{ usersShow.description }}</li>
-    </ul>
+<a href="{{ authorizeUrl }}">Begin Authorize</a>
+<h1>Welcome {{ usersShow.name }} </h1>
+<p><img src="{{ usersShow.avatar_large }}" alt="我的头像"/></p>
+<ul>
+    <li>我的名字：{{ usersShow.name }}</li>
+    <li>我的ID：{{ usersShow.id }}</li>
+    <li>我的粉丝：{{ usersShow.followers_count }}</li>
+    <li>我的关注：{{ usersShow.friends_count }}</li>
+</ul>
 
+<<<<<<< HEAD
+<h2>我的关注</h2>
+    <ol>
+    {% for friend in userFriends %}
+=======
     <h2>我的微博</h2>
     <ol>
     {% for statuse in userTimeline.statuses %}
+>>>>>>> f3bc59094681d71a20eb4fd5754ed6c00fb2fc29
         <p>
-            <li>{{ statuse.created_at }}</li>
+        <li>好友昵称：{{ friend.name}}</li>
+        {% if friend == first %}
             <ul>
-                <li>{{ statuse.text }} </li>
+                <li>头像：<img src="{{ friend.avatar_large }}" alt="好友的头像"/></li>
+                <li>ID：{{friend.id}}</li>
+                <li>所在地: {{ friend.location }}</li>
+                <li>性别：{{ friend.gender }}</li>
+                <li>粉丝数：{{ friend.followers_count}}</li>
+                <li>关注数：{{ friend.friends_count }}</li>
+                <li>微博数：{{ friend.statuses_count }}</li>
+                <li>是否认证：{{ friend.verified }}</li>
+                <li>是否关注我：{{ friend.follow_me }}</li>
+                <li>互粉数：{{ friend.bi_followers_count}}</li>
             </ul>
         </p>
+        {% endif %}
     {% endfor %}
     </ol>
+<<<<<<< HEAD
+
+
+</ul>
+=======
 {% endif %}
+>>>>>>> f3bc59094681d71a20eb4fd5754ed6c00fb2fc29
