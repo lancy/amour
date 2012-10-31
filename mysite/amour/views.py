@@ -1,6 +1,6 @@
 from django.shortcuts import render_to_response
 from weibo import APIClient
-
+from math import ceil
 
 APP_KEY = "3049348926"
 APP_SECRET = "712a1724b4d5e38b3a1895d6efce205d"
@@ -9,7 +9,9 @@ CALLBACK_URL = "http://127.0.0.1:8000/amour"
 
 def index(request):
     client = APIClient(app_key=APP_KEY, app_secret=APP_SECRET, redirect_uri=CALLBACK_URL)
-    requestResults = dict()    
+    requestResults = dict()
+                            #The dict() constructor builds dictionaries directly from lists of key-value pairs stored as
+                            #tuples. When the pairs form a pattern, list comprehensions can compactly specify the key-value list.
 
     if "code" in request.GET:
         print("in request code, set_cookie")
@@ -29,14 +31,27 @@ def index(request):
         print("client is not expires, get infomation")
         accountUid = client.get.account__get_uid()
         usersShow = client.get.users__show(uid=accountUid["uid"])
-        userTimeline = client.get.statuses__user_timeline(count=20)
-        for statuse in userTimeline["statuses"]:
-            statuse["comments"] = client.get.comments__show(id=statuse.id)
+        userFriendsList = list();
+        f = False
+
+        userFriends = client.get.friendships__friends(uid=accountUid["uid"])
+        while userFriends.next_cursor != 0:
+            for user in userFriends["users"]:
+                userFriendsList.append(user)
+                if(f == False):
+                    first = user
+                    f = True
+            userFriends =  client.get.friendships__friends(uid=accountUid["uid"],cursor=userFriends.next_cursor)
+        for user in userFriends["users"]:
+            userFriendsList.append(user)
+
         requestResults = {
+            "userFriends": userFriendsList,
             "usersShow": usersShow,
-            "userTimeline": userTimeline,
+            "first":first,
+
         }
-        print userTimeline
+
 
     else:
         authorizeUrl = client.get_authorize_url()
