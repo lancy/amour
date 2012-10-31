@@ -14,7 +14,7 @@
     </ul>
 
     <h2>我的微博</h2>
-    <ul>
+    <ol>
     {% for statuse in userTimeline.statuses %}
         <p>
             <li>{{ statuse.created_at }}</li>
@@ -23,5 +23,5 @@
             </ul>
         </p>
     {% endfor %}
-    </ul>
+    </ol>
 {% endif %}
