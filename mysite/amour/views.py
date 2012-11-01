@@ -1,6 +1,5 @@
 from django.shortcuts import render_to_response
 from weibo import APIClient
-from math import ceil
 
 
 APP_KEY = "3049348926"
@@ -32,7 +31,7 @@ def index(request):
         print("client is not expires, get infomation")
         accountUid = client.get.account__get_uid()
         usersShow = client.get.users__show(uid=accountUid["uid"])
-        userFriendsList = list();
+        userFriendsList = list()
         f = False
 
         userFriends = client.get.friendships__friends(uid=accountUid["uid"])
@@ -42,17 +41,16 @@ def index(request):
                 if(f == False):
                     first = user
                     f = True
-            userFriends =  client.get.friendships__friends(uid=accountUid["uid"],cursor=userFriends.next_cursor)
+            userFriends = client.get.friendships__friends(uid=accountUid["uid"], cursor=userFriends.next_cursor)
         for user in userFriends["users"]:
             userFriendsList.append(user)
 
         requestResults = {
             "userFriends": userFriendsList,
             "usersShow": usersShow,
-            "first":first,
+            "first": first,
 
         }
-
 
     else:
         authorizeUrl = client.get_authorize_url()
