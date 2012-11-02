@@ -8,15 +8,9 @@
     <li>我的关注：{{ usersShow.friends_count }}</li>
 </ul>
 
-<<<<<<< HEAD
 <h2>我的关注</h2>
     <ol>
     {% for friend in userFriends %}
-=======
-    <h2>我的微博</h2>
-    <ol>
-    {% for statuse in userTimeline.statuses %}
->>>>>>> f3bc59094681d71a20eb4fd5754ed6c00fb2fc29
         <p>
         <li>好友昵称：{{ friend.name}}</li>
         {% if friend == first %}
@@ -36,10 +30,4 @@
         {% endif %}
     {% endfor %}
     </ol>
-<<<<<<< HEAD
 
-
-</ul>
-=======
-{% endif %}
->>>>>>> f3bc59094681d71a20eb4fd5754ed6c00fb2fc29
