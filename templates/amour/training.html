@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title></title>
+</head>
+<body>
+<a href=".">Back To Index</a>
+
+<ul>
+    <form action="training" method="POST"> {% csrf_token %}
+        <input type="submit" name="训练">
+        {% for state in statusesList %}
+            <p>
+                <li>hit probability = {{ state.probability }}</li>
+                <ul>
+                    <li>{{ state.text }}</li>
+                </ul>
+                <input type="radio" name="train{{ forloop.counter }}" value="pass" checked="checked">不训练
+                <input type="radio" name="train{{ forloop.counter }}" value="hit">这是抽奖微博
+                <input type="radio" name="train{{ forloop.counter }}" value="mis">这不是抽奖微博
+                <input type="hidden" name="text{{ forloop.counter }}" value="{{ state.text }}">
+        </p>
+        {% endfor %}
+        <input type="submit" name="训练">
+    </form>
+
+</ul>
+
+</body>
+</html>

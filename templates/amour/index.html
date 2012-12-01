@@ -1,35 +1,15 @@
-{# hello world #}
-<a href="{{ authorizeUrl }}">Begin Authorize</a>
-<h1>Welcome {{ usersShow.name }} </h1>
-<p><img src="{{ usersShow.avatar_large }}" alt="我的头像"/></p>
-<ul>
+{% if authorizeUrl %}
+    <a href="{{ authorizeUrl }}">Begin Authorize</a>
+{% else %}
+    <h1>Welcome {{ usersShow.name }} </h1>
+    <p><img src="{{ usersShow.avatar_large }}" alt="我的头像"/></p>
+    <ul>
     <li>我的名字：{{ usersShow.name }}</li>
     <li>我的ID：{{ usersShow.id }}</li>
     <li>我的粉丝：{{ usersShow.followers_count }}</li>
     <li>我的关注：{{ usersShow.friends_count }}</li>
-</ul>
-
-<h2>我的关注</h2>
-    <ol>
-
-    {% for friend in userFriends %}
-        <p>
-        <li>好友昵称：{{ friend.name}}</li>
-        {% if friend == first %}
-            <ul>
-                <li>头像：<img src="{{ friend.avatar_large }}" alt="好友的头像"/></li>
-                <li>ID：{{friend.id}}</li>
-                <li>所在地: {{ friend.location }}</li>
-                <li>性别：{{ friend.gender }}</li>
-                <li>粉丝数：{{ friend.followers_count}}</li>
-                <li>关注数：{{ friend.friends_count }}</li>
-                <li>微博数：{{ friend.statuses_count }}</li>
-                <li>是否认证：{{ friend.verified }}</li>
-                <li>是否关注我：{{ friend.follow_me }}</li>
-                <li>互粉数：{{ friend.bi_followers_count}}</li>
-            </ul>
-        </p>
-        {% endif %}
-    {% endfor %}
-    </ol>
-
+    </ul>
+    抽奖微博识别训练：<br>
+    <a href="./training">开始批量训练（未完成）</a> <br>
+    <a href="./single">开始单个训练</a> <br>
+{% endif %}

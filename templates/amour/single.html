@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Single Traning</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+{{ message }}
+{% if text %}
+<p>
+    是抽奖微博的概率 = {{ probability }} <br>
+    <textarea cols="60" rows="7" readonly="readonly">{{ text }}</textarea><br>
+    <form actioin="single" method="POST"> {% csrf_token %}
+        <input type="radio" name="train" value="hit">这是抽奖微博
+        <input type="radio" name="train" value="mis">这不是抽奖微博
+        <input type="hidden" name="text" value="{{ text }}">
+        <input type="submit" value="训练">
+    </form>
+</p>
+（不训练该微博，输入新微博继续）
+{% endif %}
+
+    <form action="single" method="POST"> {% csrf_token %}
+        输入一个微博:<br>
+        <textarea cols="60" rows="7" name="string"></textarea><br>
+        <input type="submit" name="提交">
+    </form>
+
+</body>
+</html>
